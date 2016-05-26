@@ -149,7 +149,7 @@ namespace Server.BusinessLogic.Implementation
 
                 var first = chunk % 10;
                 var second = (chunk / 10) % 10;
-                var third = (chunk / 100) % 100;
+                var third = (chunk / 100) % 10;
 
                 if (first > 0)
                 {
