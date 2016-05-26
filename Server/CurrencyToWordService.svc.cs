@@ -1,12 +1,19 @@
-﻿using System;
+﻿using Server.BusinessLogic;
 
 namespace Server
 {    
     public class CurrencyToWordService : ICurrencyToWordService
     {
+        private readonly IWordPresentationService wordPresentationService;
+
+        public CurrencyToWordService(IWordPresentationService wordPresentationService)
+        {
+            this.wordPresentationService = wordPresentationService;
+        }
+
         public string CurrencyToWord(decimal currency)
         {
-            throw new NotImplementedException();
+            return this.wordPresentationService.GetWordPresentation(currency);
         }
     }
 }
