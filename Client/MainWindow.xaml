@@ -33,8 +33,7 @@
         <Label Content="Please input currency" Grid.Row="0" Grid.Column="0" Margin="2" Grid.ColumnSpan="3"/>
         <TextBox Text="{Binding Currency, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="2" />
         <Label Content="$" Grid.Row="1" Grid.Column="1" Margin="2"/>
-        <Button Content="Convert to words!" Command="{Binding Calculate}" Grid.Row="1" Grid.Column="2" Margin="2" />
-        <!--<Label Content="{Binding Result}" Grid.Row="2" Grid.Column="0" Margin="2" Grid.ColumnSpan="3"/>-->
+        <Button Content="Convert to words!" Command="{Binding Calculate}" Grid.Row="1" Grid.Column="2" Margin="2" />        
         <TextBox Text="{Binding Result}" Grid.Row="3" Grid.Column="0" Margin="2" Grid.ColumnSpan="3" />
     </Grid>
 </Window>
