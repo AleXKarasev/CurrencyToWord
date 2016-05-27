@@ -1,25 +1,33 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Input;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Client.Clients;
 
 namespace Client.ViewModel
 {    
     public class MainViewModel : ViewModelBase, IDataErrorInfo
-    {        
-        public MainViewModel()
-        {
-            Calculate = new RelayCommand<string>((currency) => CalculateExecute(currency), (currency) => true);
+    {
+        private readonly IServerClient serverClient;
+
+        public MainViewModel(IServerClient _serverClient)
+        {            
+            serverClient = _serverClient;
+
+            Calculate = new RelayCommand<string>(async(currency) => await CalculateExecute().ConfigureAwait(false), (currency) => String.IsNullOrEmpty(this[nameof(Currency)]));
         }
 
         #region Commands
 
-        public ICommand Calculate { get; private set; }
+        public RelayCommand<string> Calculate { get; private set; }
 
-        private void CalculateExecute(string currency)
-        {             
-             this.Result = "Hello!";
+        private async Task CalculateExecute()
+        {
+            this.Result = "Processing...";
+
+            this.Result = await serverClient.CurrencyToWord(Convert.ToDecimal(Currency)).ConfigureAwait(false);
         }
 
         #endregion
@@ -33,6 +41,7 @@ namespace Client.ViewModel
             set
             {                
                 _currency = value;
+                Calculate.RaiseCanExecuteChanged();
                 RaisePropertyChanged(nameof(Currency));                
             }
         }

@@ -18,17 +18,23 @@
     </Window.Resources>
     <Grid Margin="25">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />            
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>            
             <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBox Text="{Binding Currency, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Margin="2" />
-        <Button Content="Calculate it!" Command="{Binding Calculate}" Grid.Row="0" Grid.Column="1" Margin="2" />
-        <Label Content="{Binding Result}" Grid.Row="1" Grid.Column="0" Margin="2" Grid.ColumnSpan="3"/>
+        <Label Content="Please input currency" Grid.Row="0" Grid.Column="0" Margin="2" Grid.ColumnSpan="3"/>
+        <TextBox Text="{Binding Currency, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="2" />
+        <Label Content="$" Grid.Row="1" Grid.Column="1" Margin="2"/>
+        <Button Content="Convert to words!" Command="{Binding Calculate}" Grid.Row="1" Grid.Column="2" Margin="2" />
+        <!--<Label Content="{Binding Result}" Grid.Row="2" Grid.Column="0" Margin="2" Grid.ColumnSpan="3"/>-->
+        <TextBox Text="{Binding Result}" Grid.Row="3" Grid.Column="0" Margin="2" Grid.ColumnSpan="3" />
     </Grid>
 </Window>

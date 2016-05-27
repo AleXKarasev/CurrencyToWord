@@ -13,6 +13,7 @@ namespace Server
 
         public string CurrencyToWord(decimal currency)
         {
+            System.Threading.Thread.Sleep(1000); // Simulate a remote server work
             return this.wordPresentationService.GetWordPresentation(currency);
         }
     }
