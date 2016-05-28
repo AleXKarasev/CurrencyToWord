@@ -32,7 +32,7 @@ namespace Client.ViewModel
 
         #endregion
 
-        #region Binding property
+        #region Binding properties
 
         private string _currency;
         public string Currency
