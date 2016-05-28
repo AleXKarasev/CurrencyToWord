@@ -16,7 +16,7 @@ namespace Client.ViewModel
         {            
             serverClient = _serverClient;
 
-            Calculate = new RelayCommand<string>(async(currency) => await CalculateExecute().ConfigureAwait(false), (currency) => String.IsNullOrEmpty(this[nameof(Currency)]));
+            Calculate = new RelayCommand<string>(async(currency) => await CalculateExecute().ConfigureAwait(false), (currency) => IsCurrencyValid());
         }
 
         #region Commands
@@ -67,18 +67,15 @@ namespace Client.ViewModel
             {
                 return null;
             }
-        }
-
-        private readonly Regex _currencyValidation = new Regex("^\\d{1,9}(,\\d{1,2})?$", RegexOptions.Compiled);
+        }        
 
         public string this[string columnName]
         {
             get
             {                
                 if(columnName == nameof(Currency))
-                {
-                    decimal value;
-                    if(!decimal.TryParse(Currency, out value) || !_currencyValidation.IsMatch(Currency))
+                {                    
+                    if(!IsCurrencyValid())
                     {
                         return "Invalid number format!";
                     }
@@ -86,6 +83,14 @@ namespace Client.ViewModel
 
                 return null;
             }
+        }
+
+        private readonly Regex _currencyValidation = new Regex("^\\d{1,9}(,\\d{1,2})?$", RegexOptions.Compiled);
+
+        private bool IsCurrencyValid()
+        {
+            decimal value;
+            return decimal.TryParse(Currency, out value) && _currencyValidation.IsMatch(Currency);
         }
 
         #endregion
